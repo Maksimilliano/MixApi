@@ -20,3 +20,7 @@ yarn-error.log
 
 # Это надо для моего сервака на apache
 .htaccess
+
+# Дабы избежать конфликты в lock
+composer.lock
+package-lock.json
