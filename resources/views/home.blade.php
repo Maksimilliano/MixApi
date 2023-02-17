@@ -10,6 +10,7 @@
 @section('js')
     <script src="{{ asset('/plugins/bootstrap-5.0.2-dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/plugins/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('/js/promo.js') }}"></script>
 @endsection
 
 @section('content')
@@ -25,11 +26,16 @@
         </div>
     </div>
     <div class="header d-flex align-items-center justify-content-center">
-        <div class="title__wrapper">
+        <div id="title_anim" class="title__wrapper">
             <h1 class="title__main">{{ env('APP_NAME') }}</h1>
         </div>
     </div>
     <div class="container">
-
+        <div class="info-block">
+            <div class="content">
+                <span class="fw-bold">{{ env('APP_NAME') }}</span>
+                - is a huge collection of detailed information and community on the most popular franchises
+            </div>
+        </div>
     </div>
 @endsection

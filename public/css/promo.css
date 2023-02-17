@@ -24,6 +24,9 @@
     overflow: hidden;
     width: 0;
     opacity: 0;
+}
+
+.title__animated {
     transition: width 1s;
     animation: title_anim 1s linear forwards;
 }
