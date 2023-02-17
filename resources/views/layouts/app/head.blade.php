@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'MixApi')</title>
     <link href="{{ asset('/css/fonts.css') }}" rel="stylesheet">
+    @yield('css')
     @yield('vite')
 </head>
 <body>

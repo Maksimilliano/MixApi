@@ -1,0 +1,53 @@
+.header {
+    width: 100%;
+    height: 80vh;
+    background-image: url("../sources/star-wars_promo.jpg");
+    background-attachment: fixed;
+    background-size: 100vw;
+    background-repeat: no-repeat;
+}
+
+.header > .title__wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header > .title__wrapper {
+    background-color: #fff;
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 0;
+    opacity: 0;
+    transition: width 1s;
+    animation: title_anim 1s linear forwards;
+}
+
+.header > .title__wrapper > .title__main {
+    font-size: 3rem;
+    color: #3f3f3f;
+    text-align: center;
+}
+
+.top-menu {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #fff;
+}
+
+@keyframes title_anim {
+    0% {
+        opacity: 0.6;
+        width: 0;
+    }
+    100% {
+        opacity: 0.6;
+        width: 100%;
+    }
+}
