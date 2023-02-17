@@ -4,6 +4,8 @@
 
 @section('content')
 
-<h1>Hello my friend!</h1>
+<div class="container">
+    Hello darkness my old friend
+</div>
 
 @endsection

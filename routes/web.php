@@ -21,8 +21,8 @@ Route::get('/', function () {
 Route::get('/login', [UserController::class, 'create'])->name('register.create');
 Route::post('/login', [UserController::class, 'store'])->name('register.store');
 
-//Route::group(['middleware' => 'web'], function () {
-//    Route::get('', function() {
-//        return view('vue_app');
-//    })->where('any', '.*');
-//});
+Route::group(['middleware' => 'web'], function () {
+    Route::get('app', function() {
+        return view('vue_app');
+    })->where('any', '.*');
+});
