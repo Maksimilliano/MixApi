@@ -27,8 +27,8 @@ Route::get('/login', [AuthController::class, 'loginForm'])->name('login.create')
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-//Route::group(['middleware' => 'web'], function () {
-//    Route::get('', function() {
-//        return view('vue_app');
-//    })->where('any', '.*');
-//});
+Route::group(['middleware' => 'web'], function () {
+    Route::get('app', function() {
+        return view('vue_app');
+    })->where('any', '.*');
+});

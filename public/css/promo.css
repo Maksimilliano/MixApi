@@ -1,0 +1,104 @@
+.header {
+    width: 100%;
+    height: 93vh;
+    background-image: url("../sources/star-wars_promo.jpg");
+    background-attachment: fixed;
+    background-size: 100vw;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 1231px) {
+    .header {
+        background-position: bottom;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
+.header > .title__wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header > .title__wrapper {
+    background-color: #fff;
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 0;
+    opacity: 0;
+}
+
+.title__animated {
+    transition: width 1s;
+    animation: title_anim 1s linear forwards;
+}
+
+.header > .title__wrapper > .title__main {
+    font-size: 3rem;
+    color: #3f3f3f;
+    text-align: center;
+}
+
+.top-menu {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #fff;
+}
+
+.info-block, .info-block__reverse {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 3em;
+    margin-bottom: 6em;
+}
+.info-block > .content, .info-block__reverse > .content {
+    font-size: 1.3em;
+    margin: 15px;
+    flex: 0.5;
+}
+.info-block > .preview, .info-block__reverse > .preview {
+    margin: 15px;
+}
+
+.info-block > .preview > img, .info-block__reverse > .preview > img {
+    width: 400px;
+}
+
+.divider-block > img {
+    width: 100%;
+}
+
+@media(max-width: 992px) {
+    .info-block > .content, .info-block__reverse > .content {
+        flex: 1;
+    }
+}
+
+@media(max-width: 776px) {
+    .info-block {
+        flex-direction: column;
+    }
+
+    .info-block__reverse {
+        flex-direction: column-reverse;
+    }
+}
+
+@keyframes title_anim {
+    0% {
+        opacity: 0.6;
+        width: 0;
+    }
+    100% {
+        opacity: 0.6;
+        width: 100%;
+    }
+}
