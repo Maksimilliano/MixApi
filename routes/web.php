@@ -21,8 +21,8 @@ Route::get('/', function () {
 /*Route::group(['middleware'=>'guest'], function (){
 });*/
 
-Route::get('/register', [AuthController::class, 'create'])->name('register.create');
-Route::post('/register', [AuthController::class, 'store'])->name('register.store');
+Route::get('/register', [AuthController::class, 'registerView'])->name('register.create');
+Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login.create');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
