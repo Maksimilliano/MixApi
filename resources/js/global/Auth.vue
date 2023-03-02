@@ -6,16 +6,16 @@
                     <div class="d-flex flex-wrap justify-content-center">
                         <div>
                             <div v-if="!isLogin" class="mb-4">
-                                <va-input label="Name" bordered />
+                                <va-input v-model="form.name" label="Name" bordered />
                             </div>
                             <div class="mb-4">
-                                <va-input label="Email" bordered />
+                                <va-input v-model="form.email" label="Email" bordered />
                             </div>
                             <div class="mb-4">
-                                <va-input label="Password" bordered />
+                                <va-input v-model="form.password" label="Password" bordered />
                             </div>
                             <div v-if="!isLogin" class="mb-4">
-                                <va-input label="Password Confirmation" bordered />
+                                <va-input v-model="form.password_confirm" label="Password Confirmation" bordered />
                             </div>
                         </div>
                         <div class="m-4">
@@ -51,8 +51,14 @@ export default {
         return {
             authType: '',
             loginType: 'login',
+            form: {
+                name: '',
+                email: '',
+                password: '',
+                password_confirm: '',
+            },
+            isSent: false,
         }
-
     },
     computed: {
         isLogin() {
