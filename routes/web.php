@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,14 +21,16 @@ Route::get('/', function () {
 /*Route::group(['middleware'=>'guest'], function (){
 });*/
 
-Route::get('/register', [AuthController::class, 'registerView'])->name('register.create');
-Route::post('/register', [AuthController::class, 'register'])->name('register.store');
-Route::get('/login', [AuthController::class, 'loginForm'])->name('login.create');
-Route::post('login', [AuthController::class, 'login'])->name('login');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [AuthController::class, 'registerView'])->name('register.create');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.store');
+    Route::get('/login', [AuthController::class, 'loginForm'])->name('login.create');
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+});
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::group(['middleware' => 'web'], function () {
-    Route::get('app', function() {
+    Route::get('app', function () {
         return view('vue_app');
     })->where('any', '.*');
 });
