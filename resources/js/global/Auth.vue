@@ -6,16 +6,43 @@
                     <div class="d-flex flex-wrap justify-content-center">
                         <div>
                             <div v-if="!isLogin" class="mb-4">
-                                <va-input v-model="form.name" label="Name" bordered />
+                                <va-input
+                                    v-model="form.name"
+                                    label="Name"
+                                    :error="errors.name.length > 0"
+                                    :error-messages="errors.name"
+                                    @keydown="resetErrors('name')"
+                                />
                             </div>
                             <div class="mb-4">
-                                <va-input v-model="form.email" label="Email" bordered />
+                                <va-input
+                                    v-model="form.email"
+                                    label="Email"
+                                    type="email"
+                                    :error="errors.email.length > 0"
+                                    :error-messages="errors.email"
+                                    @keydown="resetErrors('email')"
+                                />
                             </div>
                             <div class="mb-4">
-                                <va-input v-model="form.password" label="Password" bordered />
+                                <va-input
+                                    v-model="form.password"
+                                    label="Password"
+                                    type="password"
+                                    :error="errors.password.length > 0"
+                                    :error-messages="errors.password"
+                                    @keydown="resetErrors('password')"
+                                />
                             </div>
                             <div v-if="!isLogin" class="mb-4">
-                                <va-input v-model="form.password_confirm" label="Password Confirmation" bordered />
+                                <va-input
+                                    v-model="form.password_confirmation"
+                                    label="Password Confirmation"
+                                    type="password"
+                                    :error="errors.password_confirmation.length > 0"
+                                    :error-messages="errors.password_confirmation"
+                                    @keydown="resetErrors('password_confirmation')"
+                                />
                             </div>
                         </div>
                         <div class="m-4">
@@ -30,9 +57,10 @@
                             </span>
                         </div>
                     </div>
-                    <va-button>
+                    <va-button @click="requestSend" :disabled="isSent">
                         <span v-if="isLogin">Login</span>
                         <span v-else>Register</span>
+                        <loader :active="isSent" :size="'sm'" />
                     </va-button>
                 </va-card-content>
             </va-card>
@@ -45,8 +73,13 @@
 </template>
 
 <script>
+import Loader from "../components/UI/Loader.vue";
+import {login, register} from '../api/auth';
+import {setLocalItem, getLocalItem} from '../libs/LocalStorage';
+
 export default {
     name: "Auth",
+    components: {Loader},
     data() {
         return {
             authType: '',
@@ -55,7 +88,13 @@ export default {
                 name: '',
                 email: '',
                 password: '',
-                password_confirm: '',
+                password_confirmation: '',
+            },
+            errors: {
+                name: [],
+                email: [],
+                password: [],
+                password_confirmation: [],
             },
             isSent: false,
         }
@@ -69,6 +108,39 @@ export default {
                 return 'Sign in for getting more service functionality!'
             } else {
                 return 'Sign up for getting more service functionality!';
+            }
+        },
+    },
+    methods: {
+        resetErrors(fieldName) {
+            if (fieldName && this.errors.hasOwnProperty(fieldName)) {
+                this.errors[fieldName] = [];
+            }
+        },
+        async requestSend() {
+            this.isSent = true;
+            try {
+                let response = null;
+                if (this.authType === this.loginType) {
+                    const {email, password} = this.form;
+                    const {data} = await login({email, password});
+                    response = data;
+                } else {
+                    const {data} = await register({...this.form});
+                    response = data;
+                }
+
+                setLocalItem('user', response.data);
+                window.location.href = process.env.REDIRECT_AFTEER_LOGIN ?? '/';
+            } catch (e) {
+                this.isSent = false;
+                if (e.response && e.response.status === 422) {
+                    for (let key in e.response.data.errors) {
+                        this.errors[key] = e.response.data.errors[key];
+                    }
+                } else {
+                    console.error(e);
+                }
             }
         },
     },
