@@ -24,3 +24,5 @@ yarn-error.log
 # Дабы избежать конфликты в lock
 composer.lock
 package-lock.json
+
+.vue-env
