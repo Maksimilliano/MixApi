@@ -1,6 +1,21 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import fs from 'fs';
+
+const parse = (envStr) => {
+    const arrayPreparedData = envStr
+        .split('\n')
+        .filter(i => i.trim().length > 0);
+    const valKeyData = arrayPreparedData
+        .map(s => s.split('=').filter(i => i.trim().length > 0));
+    let data = {};
+    valKeyData.forEach(valKeyArr => {
+        data[valKeyArr[0]] = valKeyArr[1];
+    });
+
+    return data;
+}
 
 export default defineConfig({
     plugins: [
@@ -27,4 +42,7 @@ export default defineConfig({
             },
         }),
     ],
+    define: {
+        'process.env': parse(fs.readFileSync('./.vue-env', 'utf-8'))
+    }
 });
