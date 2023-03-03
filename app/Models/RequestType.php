@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+
 
 class RequestType extends Model
 {
@@ -23,7 +23,7 @@ class RequestType extends Model
         return $this->belongsTo(Type::class);
     }
 
-    public function universe(): HasOne {
-        return $this->hasOne(Universe::class);
+    public function universe(): BelongsTo {
+        return $this->belongsTo(Universe::class);
     }
 }

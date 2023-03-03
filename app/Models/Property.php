@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Property extends Model
 {
@@ -13,4 +14,8 @@ class Property extends Model
         'name',
         'slug',
     ];
+
+    public function propertyValue(): HasMany {
+        return $this->hasMany(PropertyValue::class);
+    }
 }

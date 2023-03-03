@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Universe extends Model
@@ -29,8 +29,8 @@ class Universe extends Model
         'headers' => 'array',
     ];
 
-    public function requestType(): BelongsTo {
-        return $this->belongsTo(RequestType::class);
+    public function requestType(): HasMany {
+        return $this->hasMany(RequestType::class);
     }
 
     public function characters(): MorphToMany {
